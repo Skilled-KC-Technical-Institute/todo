@@ -41,6 +41,7 @@ app.listen(port, function(){
 Retrieve Specific Item in List
 */ 
 
+//127.0.0.1:3000/items 
 app.get('/items', function(request, response){
     /*get data*/ 
     Item.find(function(err, items){
@@ -49,51 +50,50 @@ app.get('/items', function(request, response){
     });    
 }); 
 
-
-/* Jeff */ 
-///127.0.0.1:3000/medium 
-app.get('/medium', function (request, response) {
-    let myVal = Item.find({
-        itemPriority: "Medium" // traverse through list and find an item by priority
-    },
+// /* Jeff */ 
+// ///127.0.0.1:3000/medium 
+// app.get('/medium', function (request, response) {
+//     let myVal = Item.find({
+//         itemPriority: "Medium" // traverse through list and find an item by priority
+//     },
     
-    function (error, anArrayOfMediumPriorityItems) {
-        if (error) return console.error(error);
-        response.send(anArrayOfMediumPriorityItems);
-    });
+//     function (error, anArrayOfMediumPriorityItems) {
+//         if (error) return console.error(error);
+//         response.send(anArrayOfMediumPriorityItems);
+//     });
 
 
-});
+// });
 
-/*ryan */ 
-//http://127.0.0.1:3000/tasks/5fc90ebc5a6168f0f3f89458
-app.get('/tasks/:id', (request, response) => {
-    let myQuery = Item.findOne({ _id: request.params.id }); 
+// /*ryan */ 
+// //http://127.0.0.1:3000/tasks/5fc90ebc5a6168f0f3f89458
+// app.get('/tasks/:id', (request, response) => {
+//     let myQuery = Item.findOne({ _id: request.params.id }); 
 
-    //do other stuff 
-    myQuery.exec((err, item) => {
-        if (err) return console.error(err);
-        response.send(item);
-    });
+//     //do other stuff 
+//     myQuery.exec((err, item) => {
+//         if (err) return console.error(err);
+//         response.send(item);
+//     });
 
-});
+// });
 
-app.post('/item', function(request, response){
-    //use the request data to create a new item 
-    //and add it to my database. 
-    console.log(request); 
-    let item1 = new Item({
-        itemName     : "Do Dishes",
-        itemPriority : "High" ,
-        assignee     : "Willie",
-        completed    : false  
-    }); 
+// app.post('/item', function(request, response){
+//     //use the request data to create a new item 
+//     //and add it to my database. 
+//     console.log(request); 
+//     let item1 = new Item({
+//         itemName     : "Do Dishes",
+//         itemPriority : "High" ,
+//         assignee     : "Willie",
+//         completed    : false  
+//     }); 
 
-    item1.save(function(err, item){
-        if (err) return console.error(err);
-        console.log(item); 
-    }); 
-});
+//     item1.save(function(err, item){
+//         if (err) return console.error(err);
+//         console.log(item); 
+//     }); 
+// });
 
 
 

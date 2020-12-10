@@ -16,6 +16,9 @@ async function getToDoList(){
 
 function clickButton(){
     getToDoList().then(function(body){
+        for(let i = 0; i < body.length; i++){
+            console.log(body[i].itemName); 
+        }
         let myObjs = JSON.stringify(body); 
         document.body.append(myObjs); 
         console.log(body); 
