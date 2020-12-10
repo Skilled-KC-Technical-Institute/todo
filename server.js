@@ -50,6 +50,10 @@ app.get('/items', function(request, response){
     });    
 }); 
 
+//Add a app.post to send some data and save it 
+//Add a app.put call to update some data
+//Add a app.delete call to delete some data 
+
 // /* Jeff */ 
 // ///127.0.0.1:3000/medium 
 // app.get('/medium', function (request, response) {
