@@ -5,16 +5,20 @@ async function getToDoList(){
     }
 
     const response = await fetch("/items", requestOptions); 
-    return response; 
+    const body = await response.json(); 
+    if(response.status != 200){
+        throw Error(body.message); 
+    }
+
+    return body; 
 
 }
 
 function clickButton(){
-    getToDoList().then(function(response){
-        if(response.status === 200){
-            document.body.append(response); 
-            console.log("We made it!"); 
-    }
+    getToDoList().then(function(body){
+        let myObjs = JSON.stringify(body); 
+        document.body.append(myObjs); 
+        console.log(body); 
     }).catch(function(err){
         console.log(err); 
     }); 
