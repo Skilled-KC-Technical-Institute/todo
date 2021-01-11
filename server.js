@@ -35,7 +35,7 @@ app.use(express.urlencoded({ extended:false }));
 
 //opening up our server to listen on a specific ip address and port 
 //ip addresses are also known as hostnames 
-app.listen(port, function(){
+var server = app.listen(port, function(){
     console.log("The server is running at port " + port); 
 });
 
@@ -46,8 +46,9 @@ app.get('/items', function(request, response){
     /*get data*/ 
     Item.find(function(err, items){
             if (err) return console.error(err);
+            response.statusCode = 200; 
             response.send(items); 
-    });    
+    })    
 }); 
 
 
@@ -63,19 +64,14 @@ app.post('/items', function(request, response){
 
 }); 
 
-app.delete('/items:id', function(request, response){
-    console.log(request.params.id);
+app.delete('/items', function(request, response){
+
     /*delete data*/ 
-    Item.deleteOne({ _id : request.params.id }, function (err) {
+    Item.deleteOne(request.body, function (err) {
         if (err){ console.log(err); return; }
         response.sendStatus(204); 
       });  
 }); 
 
-app.put('/items', function(request, response){
-    /*delete data*/ 
-    Item.findOneAndUpdate(request.body, function (err) {
-        if (err){ console.log(err); return; }
-        response.sendStatus(204); 
-      });  
-}); 
+/*for testing purposes */ 
+module.exports = server; 
