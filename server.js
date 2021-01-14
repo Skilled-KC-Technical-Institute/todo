@@ -4,7 +4,7 @@ var Item = require('./models/ToDoItem.js');
 //Load in the express module
 const express = require('express');  
 const path = require('path');
-
+const API_VERSION = "v1"
 //creates a new express application 
 const app = express(); 
 //declare the port we want to connect to 
@@ -50,12 +50,26 @@ app.get('/items', function(request, response){
             response.send(items); 
     })    
 }); 
+        
+app.get('/items/:itemID', function(request, response){
+    //do what we want on the server side
+    Item.findById(request.params.itemID, function(err, item){
+        if(err){ console.log(err); response.sendStatus(500); }
+        response.send(item); 
+    }); 
+}); 
 
+app.put('/items/:itemID', function(request, response){
+
+}); 
 
 app.post('/items', function(request, response){
+
+    console.log(response); 
     let newData = new Item(request.body); 
     newData.save(function(error,item){
-        if(error) { console.log(error); 
+        if(error) {
+            console.log(error); 
             response.sendStatus(500);     
         }
         console.log("Success, item added!"); 
